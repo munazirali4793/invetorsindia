@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Tabs</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .navtabs {
+            display: flex;
+            position: relative;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .navtab {
+            padding: 15px 25px;
+            cursor: pointer;
+            color: #555;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navtab:hover {
+            color: #007bff;
+        }
+
+        .navtab.active {
+            color: #007bff;
+        }
+
+        .underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background-color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .content h1 {
+            color: #333;
+        }
+
+        .content p {
+            color: #777;
+            font-size: 18px;
+        }
+
+        /* Animation for underline movement */
+        .navtabs .underline {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navtabs">
+    <div class="navtab active" data-target="home">Home</div>
+    <div class="navtab" data-target="about">About</div>
+    <div class="navtab" data-target="contact">Contact</div>
+    <div class="navtab" data-target="page4">Page 4</div>
+    <div class="navtab" data-target="page5">Page 5</div>
+    <div class="navtab" data-target="page6">Page 6</div>
+    <div class="navtab" data-target="page7">Page 7</div>
+    <div class="underline"></div>
+</div>
+
+<div id="home" class="content active">
+    <h1>Welcome to the Home Page</h1>
+    <p>This is the home section.</p>
+</div>
+<div id="about" class="content">
+    <h1>About Us</h1>
+    <p>This is the about section.</p>
+</div>
+<div id="contact" class="content">
+    <h1>Contact Us</h1>
+    <p>This is the contact section.</p>
+</div>
+<div id="page4" class="content">
+    <h1>Page 4</h1>
+    <p>This is the page 4 section.</p>
+</div>
+<div id="page5" class="content">
+    <h1>Page 5</h1>
+    <p>This is the page 5 section.</p>
+</div>
+<div id="page6" class="content">
+    <h1>Page 6</h1>
+    <p>This is the page 6 section.</p>
+</div>
+<div id="page7" class="content">
+    <h1>Page 7</h1>
+    <p>This is the page 7 section.</p>
+</div>
+
+<script>
+    // JavaScript to handle tab switching and underline movement
+    const navtabs = document.querySelectorAll('.navtab');
+    const contents = document.querySelectorAll('.content');
+    const underline = document.querySelector('.underline');
+
+    navtabs.forEach((tab, index) => {
+        tab.addEventListener('click', function () {
+            // Remove 'active' class from all tabs
+            navtabs.forEach(t => t.classList.remove('active'));
+            // Add 'active' class to the clicked tab
+            this.classList.add('active');
+
+            // Show the associated content and hide others
+            const target = this.getAttribute('data-target');
+            contents.forEach(content => {
+                if (content.id === target) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            // Move the underline to the active tab
+            underline.style.width = `${tab.offsetWidth}px`;
+            underline.style.left = `${tab.offsetLeft}px`;
+        });
+
+        // Initialize the underline width and position on page load
+        if (index === 0) {
+            underline.style.width = `${tab.offsetWidth}px`;
+            underline.style.left = `${tab.offsetLeft}px`;
+        }
+    });
+</script>
+
+</body>
+</html>

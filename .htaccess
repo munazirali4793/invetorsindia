@@ -1,0 +1,20 @@
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteRule ^(.*)$ $1.php
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+Redirect /stem-summit-awards/privacy-policy /privacy-policy
+
+#go aicra site page
+Redirect 301 /india-stem-lab https://www.aicra.org/India-STEMlab
+
+Redirect /india-stem-round-table-conference /india-stem-lab-conference
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
